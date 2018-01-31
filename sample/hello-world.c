@@ -108,7 +108,9 @@ listener_cb(struct evconnlistener *listener, evutil_socket_t fd,
 static void
 conn_writecb(struct bufferevent *bev, void *user_data)
 {
+    const char *response = "Have a client access!!!";
 	struct evbuffer *output = bufferevent_get_output(bev);
+    evbuffer_add(output, response, strlen(response));
 	if (evbuffer_get_length(output) == 0) {
 		printf("flushed answer\n");
 		bufferevent_free(bev);
